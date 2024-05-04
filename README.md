@@ -9,9 +9,11 @@ Im folgenden findest du beschrieben, wie du die Beispiele installieren und start
 ## Voraussetzungen
 
 Das Repository besteht aus drei **Anwendungen**:
-1. Wir haben ein Backend, das unsere Daten und unsere Geschäftslogik enthält. Die Daten werden mit einer einfachen HTTP API zur Verfügung gestellt. Dieses Backend bezeichne ich im folgenden einfach nur als das **Backend**. Das Backend ist "fertig" und wird im Workshop nicht weiterentwickelt.
-2. Die zweite Anwendung ist ein **React Single-Page-Anwendung**. Dabei handelt es sich um eine klassische, client-seitig ausgeführte React-Anwendung, die im folgenden als **SPA** bezeichnet wird. Sie kommuniziert mit dem Backend via HTTP Calls. Diese Anwendung werden wir in den Übungen weiterentwickeln bzw. vervollständigen.
-2. Die dritte Anwendung ist eine **Node.js-Anwendung**. Diese fungiert hier als eine Art "Backend for frontend". Die Anwendung kommuniziert mit dem Backend und stellt das Frontend für den Browser zur Verfügung. Diese Anwendung bezeichne ich im folgenden als **Node.js**-Anwendung. Diese Anwendung werden wir in den Übungen weiterentwickeln bzw. vervollständigen.
+1. Wir haben ein Backend, das unsere Daten und unsere Geschäftslogik enthält. Die Daten werden mit einer einfachen HTTP API zur Verfügung gestellt. Dieses Backend bezeichne ich im folgenden einfach nur als das **Backend**. Das Backend ist "fertig" und wird als "Black Box" (wie ein externer Service) behandelt.
+
+2. Die zweite Anwendung ist ein **React Single-Page-Anwendung**. Dabei handelt es sich um eine klassische, client-seitig ausgeführte React-Anwendung, die im folgenden als **SPA** bezeichnet wird. Sie kommuniziert mit dem Backend via HTTP Calls. 
+
+3. Die dritte Anwendung ist eine **Node.js-Anwendung**. Diese fungiert hier als eine Art "Backend for frontend". Die Anwendung kommuniziert mit dem Backend und stellt das Frontend für den Browser zur Verfügung. Diese Anwendung bezeichne ich im folgenden als **Node.js**-Anwendung. 
 
 > Die beiden Anwendungen **React Single-Page-Anwendung** und **Node.js-Anwendung** haben in etwa dieselben Features. Damit du sie gut miteinander vergleichen kannst, sind ihre Ordner- und Komponentenstrukturen auch ähnlich.
 > 
@@ -29,26 +31,18 @@ In dieser Variante müssen die Ports `8080` und `8432` verfügbar sein.
 
 **Variante 2**: Starten per docker-compose
 
-Das Backend gibt es als fertig gebautes Docker Image. Wenn du Docker auf deinem Laptop installiert hast, ist die einfachste Möglichkeit, das Backend zu verwenden, über das hier enthaltene docker-compose-File den Backend-Prozess samt Datenbank zu starten. Das [Image der Backend-Anwendung liegt in der GitHub Container Registry](https://github.com/nilshartmann/nextjs-workshop/pkgs/container/nextjs-workshop). Das bedeutet, dein Laptop bzw. Docker muss in der Lage sein, Images aus der Docker und der GitHub Registry zu installieren.
+Das Backend gibt es als fertig gebautes Docker Image. Wenn du Docker auf deinem Laptop installiert hast, ist die einfachste Möglichkeit, das Backend zu verwenden, über das hier enthaltene docker-compose-File den Backend-Prozess samt Datenbank zu starten. Das [Image der Backend-Anwendung liegt in der GitHub Container Registry](https://github.com/nilshartmann/state-of-react-2024/pkgs/container/state-of-react-2024). Das bedeutet, dein Laptop bzw. Docker muss in der Lage sein, Images aus der Docker und der GitHub Registry zu installieren.
 
 In dieser Variante muss der Port `8080` verfügbar sein.
 
-> Wenn du normalerweise kein Java entwickelts, und Docker installiert hast, ist dieses die beste Variante.
+> Wenn du normalerweise kein Java entwickelst und Docker installiert hast, ist dieses die einfachste Variante.
 
-**Variante 3**: Verwenden der gehosteten Variante in der Cloud
-
-Ich werde das Backend während des Workshops auch in der Cloud starten. Du kannst die React SPA- und die Next.js-Anwendungen dann so konfigurieren, dass sie die Instanz in der Cloud verwenden.
-
-> - Wenn du kein Docker auf deinem Laptop hast, oder das Docker Image nicht installieren kannst/darfst, ist diese Variante die einfachste.
-> - Aber: das gehostete Backend ist nicht das schnellste.
-> - Wenn mehrere von euch das Backend nutzen, kommt ihr euch bei schreibenden Operationen eventuell in die Quere. Das sollte technisch kein Problem sein. du darfst dich nur nicht wundern, wenn Likes und Kommentare bei dir erscheinen, die du nicht gegeben hast 😉.
-
-**Variante 4**: GitPod
+**Variante 3**: GitPod
 
 [GitPod](https://gitpod.io) ist eine vollständige Online Entwicklungsumgebung. Voraussetzung hierfür ist ein GitHub und ein GitPod-Account, die beide kostenlos sind. du kannst das komplette Repository über GitHub in GitPod starten. Dann kannst du entweder vollständig in GitPod arbeiten (Web, VS Code oder IntelliJ) oder du verwendest du nur das Backend, das in GitPod läuft, wenn du den Workspace in GitPod gestartet hast.
 
-- Diese Variante ist am besten, wenn du auf deinem Laptop nichts installieren kannst (auch keine npm-Packages)
-- du benötigst nur Internet-Zugriff (Web) und einen GitHub- und GitPod-Account, die beide kostenlos sind und die du nach dem Workshop auch wieder löschen könntest.
+- Diese Variante ist am besten, wenn du auf deinem Laptop nichts installieren möchtest (auch keine npm-Packages)
+- du benötigst nur Internet-Zugriff (Web) und einen GitHub- und GitPod-Account, die beide kostenlos sind.
 
 ### Voraussetzungen für die React SPA- und Next.js-Anwendung
 
@@ -64,7 +58,7 @@ Dein Laptop muss mit dem Package Manager in der Lage sein, npm Packages runterzu
 ## Installation und Starten des Backends
 
 - Zu den **Voraussetzungen** der einzelnen Varianten, s.o.
-- Sofern du normalerweise kein Java entwickelst, ist es am **einfachsten**, wenn du **Variante 2 (Docker)** oder **Variante 3 (Cloud)** verwendest.
+- Sofern du normalerweise kein Java entwickelst, ist es am **einfachsten**, wenn du **Variante 2 (Docker)** verwendest.
 
 ### Variante 1: Starten des Java-Prozesses in deiner IDE
 
@@ -91,41 +85,20 @@ In dem Compose-File sind der Backend-Prozess und die Datenbank beschrieben, so d
 
 Wenn das Backend gestartet ist, kannst du einmal `http://localhost:8080/api/recipes` im Browser öffnen. Dort sollte eine JSON-Liste mit Rezepten zurückgeliefert werden.
 
-### Variante 3: Verwenden des Backens in der Cloud
-
-In dieser Variante musst du das Backend nicht starten. Stattdessen legst du eine `.env`-Datei in den Verzeichnissen `01_spa/spa_workspace` und `02_nextjs/nextjs_workspace` an und trägst dort den Servernamen ein. Den Servernamen gebe ich dir während des Workshops (falls ich das vergesse, einfach fragen). Ich würde dich bitten, mit dem Server sorgsam umzugehen, der steht mehr oder weniger schutzlos im Internet 😉.
-
-Für beide Anwendungen denselben Servernamen jeweils in der `.env`-Datei eintragen:
-
-```
-# 01_spa/spa_workspace/.env
-
-RECIPIFY_BACKEND=Der-Hostname-kommt-von-Nils-im-Workshop
-```
-
-```
-# 02_nextjs/nextjs_workspace/.env
-
-RECIPIFY_BACKEND=Der-Hostname-kommt-von-Nils-im-Workshop
-```
-
-
-Zum Testen der Verbindung kannst du einmal den Cloud-Hostnamen mit dem Pfad `/api/recipes` im Browser öffnen aufrufen (https://Der-Hostname-kommt-von-Nils-im-Workshop/api/recipes).
-
-### Variante 4: GitPod
+### Variante 3: GitPod
 
 Um den kompletten Workspace in GitPod zu starten, gibt es zwei Möglichkeiten.
 
-- du kannst einfach [mit diesem Link GitPod mit dem Workspace starten](https://gitpod.io/#https://github.com/nilshartmann/nextjs-workshop)
-- du öffnest die Seite https://github.com/nilshartmann/nextjs-workshop im Browser und klickst dort auf `Open`.
+- du kannst einfach [mit diesem Link GitPod mit dem Workspace starten](https://gitpod.io/#https://github.com/nilshartmann/state-of-react-2024)
+- du öffnest die Seite https://github.com/nilshartmann/state-of-react-2024 im Browser und klickst dort auf `Open`.
 - Hinweis: grundsätzlich kannst du den Workspace über Gitpod auch in einer lokalen IDE öffnen. Dazu wirst du beim Starten von GitPod befragt. Dafür müssen aber bestimmte Voraussetzungen erfüllt sein. Weitere Informationen findest du [hier in der GitPod Dokumentation](https://www.gitpod.io/docs/references/ides-and-editors)
 
 ## Installation der beiden Frontend-Anwendungen (React SPA und Next.js)
 
 Die beiden Anwendungen existiert jeweils zweimal:
 
-1. Jeweils in einer "Workspace-Version" (Verzeichnisse: `1_spa/spa_workspace` bzw. `2_nextjs/nextjs_workspace`). **In diesen beiden Verzeichnissen werden wir während des Workshops arbeiten und die Übungen machen**.
-2. Jeweils in einer "fertigen" Version (Verzeichnisse `1_spa/spa_frontend` `2_nextjs/nextjs_frontend`), die du dir bei Interesse ansehen kannst. Diese Versionen sind weitgehend identisch mit der jeweils fertigen "Workspace-Version", enthalten aber noch ein paar Features, die über unseren Workshop hinausgehen. Wenn du diesen Stand zum ausprobieren starten möchtest, sind dieselben Schritte wie für die "Workspace-Version" erforderlich. Du führst die Schritte dann aber jeweils im Verzeichnis `1_spa/spa_frontend` bzw `2_nextjs/nextjs_frontend` aus. Du kannst immer nur jeweils die "fertige" _oder_ die "Workspace-Version" starten, da es sonst zu Port-Kollisionen kommt. 
+1. Jeweils in einer "Workspace-Version" (Verzeichnisse: `1_spa/spa_workspace` bzw. `2_nextjs/nextjs_workspace`). **In diesen Verzeichnisse mache ich während des Vortrags Live-Coding**. Du kannst Du Verzeichnisse verwenden, wenn du meine Beispiele nach dem Vortrag selbst nachvollziehen willst.
+2. Jeweils in einer "fertigen" Version (Verzeichnisse `1_spa/spa_frontend` `2_nextjs/nextjs_frontend`), die du dir bei Interesse ansehen kannst. Diese Versionen sind weitgehend identisch mit der jeweils fertigen "Workspace-Version", enthalten aber noch ein paar Features, die über den Vortrag hinausgehen. Wenn du diesen Stand zum ausprobieren starten möchtest, sind dieselben Schritte wie für die "Workspace-Version" erforderlich. Du führst die Schritte dann aber jeweils im Verzeichnis `1_spa/spa_frontend` bzw `2_nextjs/nextjs_frontend` aus. Du kannst immer nur jeweils die "fertige" _oder_ die "Workspace-Version" starten, da es sonst zu Port-Kollisionen kommt. 
 
 ### (Optional) Schritt 1: Installation von pnpm
 
@@ -195,6 +168,5 @@ Next.js hat ein sehr aggressives Caching eingebaut. Deswegen kann es manchmal se
 
 Wenn du Fragen oder Probleme hast, sprich mich gerne an.
 
-Wenn du nach dem Workshop mit mir in Kontakt bleiben möchtest, findest du hier meine [Kontaktdaten](https://nilshartmann.net/kontakt).
+Wenn du mit mir in Kontakt bleiben möchtest, findest du hier meine [Kontaktdaten](https://nilshartmann.net/kontakt).
 
-Ich wünsche dir nun viel Spaß in unserem Workshop!
