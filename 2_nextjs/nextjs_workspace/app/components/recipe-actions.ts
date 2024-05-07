@@ -1,9 +1,19 @@
-import { revalidateTag } from "next/cache";
-import { saveLike } from "@/app/components/queries.ts";
+"use server";
+import { fetchFromApi, getEndpointConfig } from "./fetch-from-api";
+import { slowDown_IncreaseLikes } from "@/app/demo-config.tsx";
 
-export function increaseLikes(recipeId: string) {
-  saveLike(recipeId);
+export async function increaseLikes(recipeId: string) {
+  const result = fetchFromApi(
+    getEndpointConfig("patch", "/api/recipes/{recipeId}/likes"),
+    {
+      path: {
+        recipeId,
+      },
+      query: {
+        slowdown: slowDown_IncreaseLikes,
+      },
+    },
+  );
 
-  revalidateTag("recipes");
-  revalidateTag(`recipes/${recipeId}`);
+  return result;
 }
