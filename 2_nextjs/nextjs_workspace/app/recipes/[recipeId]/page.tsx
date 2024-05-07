@@ -8,18 +8,12 @@ type RecipePageProps = {
   };
 };
 
-//
-//  UNVERÄNDERT ZUR VORHERIGEN ÜBUNG!
-//
-//     DU MUSST `RecipePageContent` anpassen
-//       - und ggf. überlegen, wo Du den Request für die Bewertungn startest!
-
 export default async function RecipePage({ params }: RecipePageProps) {
-  const recipe = await fetchRecipe(params.recipeId);
+  const result = await fetchRecipe(params.recipeId);
 
-  if (!recipe) {
+  if (!result) {
     notFound();
   }
 
-  return <RecipePageContent recipe={recipe.recipe} />;
+  return <RecipePageContent recipe={result.recipe} />;
 }

@@ -8,19 +8,19 @@ type RecipeListPageProps = {
 };
 
 export default function RecipeListPage({ searchParams }: RecipeListPageProps) {
-  console.log("Rendering RecipeListPage at ", new Date().toLocaleTimeString());
   const page = parseInt(searchParams.page) || 0;
+
   const result = fetchRecipes(page);
 
   return (
     <div className={"bg-goldgray"}>
       <div className={"container mx-auto space-y-8 pb-8 pt-8"}>
-        <RecipeList recipesPromise={result} />
-
         <RecipeListPaginationBar
           pageCountPromise={result}
           params={searchParams}
         />
+
+        <RecipeList recipesPromise={result} />
       </div>
     </div>
   );
