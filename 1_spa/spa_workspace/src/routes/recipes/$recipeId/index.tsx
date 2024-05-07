@@ -6,14 +6,31 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchRecipe } from "../../../components/use-queries.ts";
 
 export const Route = createFileRoute("/recipes/$recipeId/")({
-  component: RecipePage,
+  component: RecipePageWrapper,
 });
 
+function RecipePageWrapper() {
+  return (
+    <Suspense fallback={<GlobalLoadingIndicator />}>
+      <RecipePage />
+    </Suspense>
+  );
+}
+
 function RecipePage() {
+  const { recipeId } = Route.useParams();
+
+  const result = useSuspenseQuery({
+    queryKey: ["recipes", recipeId],
+    queryFn: () => fetchRecipe(recipeId),
+  });
+
+  return <RecipePageContent recipe={result.data.recipe} />;
+
   // todo:
   //  - useParams
   //  - suspenseQuery (usq)
   //  - RecipePageWrapper (rpw)
 
-  return <div>Ich bin Rezept mit Id ????</div>;
+  return <div>Ich bin Rezept mit Id {recipeId}</div>;
 }

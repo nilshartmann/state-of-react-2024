@@ -31,6 +31,10 @@ const RecipeCard = memo(function RecipeCard({ recipe }: RecipeCardProps) {
         <H1 className={"mb-4 mt-4 font-space font-bold"}>
           {/*  ---------   TODO    ---------------- */}
           <Link
+            to={"/recipes/$recipeId"}
+            params={{
+              recipeId: recipe.id,
+            }}
             preload={"intent"}
             className={"hover:text-orange_2 hover:underline"}
           >
