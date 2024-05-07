@@ -10,9 +10,9 @@ type LikesWidgetProps = {
 
 export function LikesWidget({ recipe }: LikesWidgetProps) {
   // todo:
-  //  - server action
   //  - transition (str)
   //  - optimistic (opt)
+  //  - server action
 
   const [likes, setLikes] = useState(recipe.likes);
   const [isPending, setIsPending] = useState(false);
