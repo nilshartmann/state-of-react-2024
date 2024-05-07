@@ -9,7 +9,6 @@ export const Route = createFileRoute("/recipes/$recipeId/")({
 
 function RecipePage() {
   const { recipeId } = Route.useParams();
-
   const result = useSuspenseQuery({
     queryKey: ["recipes", recipeId],
     queryFn: () => fetchRecipe(recipeId),

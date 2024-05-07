@@ -6,8 +6,8 @@ import { FeedbackForm } from "./FeedbackForm.tsx";
 import { H2 } from "../Heading.tsx";
 import { Sidebar } from "../Sidebar.tsx";
 import { DetailedRecipeDto } from "../api-types.ts";
-import FeedbackListLoader from "./FeedbackListLoader.tsx";
 import IngredientsSection from "./IngredientsSection.tsx";
+import FeedbackList from "./FeedbackList.tsx";
 
 type RecipePageContentProps = {
   recipe: DetailedRecipeDto;
@@ -33,20 +33,9 @@ export default function RecipePageContent({ recipe }: RecipePageContentProps) {
           <Sidebar>
             <H2>Feedback</H2>
 
-            {/*
-               TODO
+            {/* ------------- TODO ------------ */}
+            {/*<FeedbackList recipeId={recipe.id} />*/}
 
-               - Kommentiere die FeedbackListLoader-Komponente ein
-               - Kannst Du die Suspense-Grenzen so ziehen, dass NICHT auf den FeedbackListLoader gewartet wird
-               - das Rezept soll also in jedem Fall angezeigt werden, auch wenn der FeedbackListLoader
-                 seine Daten noch nicht gelesen hat
-               - Du kannst zum Testen beide Queries künstlich verlangsamen:
-                  - dazu in der demo-config.tsx-Datei die beiden Konstanten auf einen Delay (in ms) setzen:
-                    - slowDown_GetRecipe  (für den Rezept-Query)
-                    - slowDown_GetFeedbacks  (für das Feedback)
-            */}
-
-            {/*<FeedbackListLoader recipeId={recipe.id} />*/}
             <FeedbackForm recipeId={recipe.id} />
           </Sidebar>
         </div>

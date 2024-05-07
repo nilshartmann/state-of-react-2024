@@ -1,12 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { H1 } from "../../../components/Heading.tsx";
+import { GlobalLoadingIndicator } from "../../../components/material/GlobalLoadingIndicator.tsx";
+import { Suspense } from "react";
+import RecipePageContent from "../../../components/recipepage/RecipePageContent.tsx";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { fetchRecipe } from "../../../components/use-queries.ts";
 
 export const Route = createFileRoute("/recipes/$recipeId/")({
   component: RecipePage,
 });
 
 function RecipePage() {
-  const { recipeId } = Route.useParams();
+  // todo:
+  //  - useParams
+  //  - suspenseQuery (usq)
+  //  - RecipePageWrapper (rpw)
 
-  return <H1>Rezept: {recipeId}</H1>;
+  return <div>Ich bin Rezept mit Id ????</div>;
 }
