@@ -1,172 +1,174 @@
 # State of React 2024
 
-Dieses Repository (https://github.com/nilshartmann/state-of-react-2024) enthält den Source-Code für die Beispiel-Anwendung sowie den Workspace für meinen "State of React 2024"-Talk
+This repository (https://github.com/nilshartmann/state-of-react-2024) contains the source code for the example application and the workspace for my "State of React 2024" talk.
 
-Im folgenden findest du beschrieben, wie du die Beispiele installieren und starten kannst.
+Below you will find instructions on how to install and start the examples.
 
 ![Screenshot of example application](screenshot.png)
 
-## Voraussetzungen
+## Requirements
 
-Das Repository besteht aus drei **Anwendungen**:
-1. Wir haben ein Backend, das unsere Daten und unsere Geschäftslogik enthält. Die Daten werden mit einer einfachen HTTP API zur Verfügung gestellt. Dieses Backend bezeichne ich im folgenden einfach nur als das **Backend**. Das Backend ist "fertig" und wird als "Black Box" (wie ein externer Service) behandelt.
+The repository consists of three **applications**:
+1. We have a backend that contains our data and our business logic. The data is provided via a simple HTTP API. I will refer to this backend simply as the **Backend** going forward. The backend is "ready" and is treated as a "black box" (imagine this would be an external service).
 
-2. Die zweite Anwendung ist ein **React Single-Page-Anwendung**. Dabei handelt es sich um eine klassische, client-seitig ausgeführte React-Anwendung, die im folgenden als **SPA** bezeichnet wird. Sie kommuniziert mit dem Backend via HTTP Calls. 
+2. The second application is a **React Single-Page Application** (SPA). This is a classic, client-side executed React application that communicates with the backend via HTTP calls.
 
-3. Die dritte Anwendung ist eine **Node.js-Anwendung**. Diese fungiert hier als eine Art "Backend for frontend". Die Anwendung kommuniziert mit dem Backend und stellt das Frontend für den Browser zur Verfügung. Diese Anwendung bezeichne ich im folgenden als **Node.js**-Anwendung. 
+3. The third application is a **Next.js application**. It acts as a sort of "backend for the frontend." This application communicates with the backend and provides the frontend for the browser. I will refer to this application as the **Next.js application** going forward.
 
-> Die beiden Anwendungen **React Single-Page-Anwendung** und **Node.js-Anwendung** haben in etwa dieselben Features. Damit du sie gut miteinander vergleichen kannst, sind ihre Ordner- und Komponentenstrukturen auch ähnlich.
-> 
-> Die Ordner- und Komponentenstrukturen entsprechen **nicht best-practices** sondern sind optimiert für unsere Übungen und zum Vergleichen der beiden Anwendungen. In einem echten Projekt würdest du eine einfachere Ordner- und Komponentenstruktur wählen. Dabei würdest du - wie aus React gewohnt - nach dem **Co-Location-Prinzip** vorgehen, also Dinge beieinander lassen, die zusammengehören. Das wären in den beiden Beispiel-Anwendungen insbesondere die Komponenten, die Routen-spezifisch sind. Diese Komponenten wären in einer echten Anwendung sicherlich in den entsprechenden Routen-Ordnern.
+> The two applications **React Single-Page Application** and **Next.js application** have roughly the same features. To allow you to compare them effectively, their folder and component structures are also similar.
+>
+> The folder and component structures are **not best practices** but are optimized for our exercises and for comparing the two applications. In a real project, you would choose a simpler folder and component structure, following the **Co-Location Principle** commonly used in React, keeping related items together. In both example applications, this would particularly include components that are route-specific. These components would certainly be in the respective route folders in a real application.
 
-### Voraussetzungen für das Backend
+### Requirements for the Backend
 
-Das Backend ist in Java (21) und Spring Boot 3.2 geschrieben. Außerdem benötigt es eine Postgres 16 Datenbank. Es gibt mehrere Möglichkeiten, wie du das Backend starten und verwenden kannst. Im folgenden sind die einzelnen Varianten beschrieben. Weiter unten findest du jeweils beschrieben, wie du sie verwenden kannst.
+The backend is written in Java (21) and Spring Boot 3.2. It also requires a Postgres 16 database. There are several ways you can start and use the backend. Each variant is described below. Further down, you will find instructions on how to use them.
 
-**Variante 1**: Starten des Java-Prozesses aus deiner IDE bzw. über die Kommandozeile.
+**Variant 1**: Starting the Java process from your IDE or via the command line.
 
-Dieses ist der aufwändigste Weg und macht aus meiner Sicht nur Sinn, wenn du ohnehin Java entwickelst. Du brauchst dann ein JDK21 und Docker auf deinem Laptop. Dein Laptop muss in der Lage sein über Gradle und Docker Pakete bzw. Images zu installieren.
+This is the most complex way and makes sense only if you are already developing in Java. You will need a JDK21 and Docker on your laptop. Your laptop must be capable of installing packages or images via Gradle and Docker.
 
-In dieser Variante müssen die Ports `8080` und `8432` verfügbar sein.
+In this variant, the ports `8080` and `8432` must be available.
 
-**Variante 2**: Starten per docker-compose
+**Variant 2**: Starting via docker-compose
 
-Das Backend gibt es als fertig gebautes Docker Image. Wenn du Docker auf deinem Laptop installiert hast, ist die einfachste Möglichkeit, das Backend zu verwenden, über das hier enthaltene docker-compose-File den Backend-Prozess samt Datenbank zu starten. Das [Image der Backend-Anwendung liegt in der GitHub Container Registry](https://github.com/nilshartmann/state-of-react-2024/pkgs/container/state-of-react-2024). Das bedeutet, dein Laptop bzw. Docker muss in der Lage sein, Images aus der Docker und der GitHub Registry zu installieren.
+The backend is available as a pre-built Docker image. If you have Docker installed on your laptop, the easiest way to use the backend is via the docker-compose file included here to start the backend process along with the database. The [backend application image is in the GitHub Container Registry](https://github.com/nilshartmann/state-of-react-2024/pkgs/container/state-of-react-2024). This means your laptop or Docker must be capable of installing images from Docker and the GitHub Registry.
 
-In dieser Variante muss der Port `8080` verfügbar sein.
+In this variant, the port `8080` must be available.
 
-> Wenn du normalerweise kein Java entwickelst und Docker installiert hast, ist dieses die einfachste Variante.
+> If you normally don't develop in Java and have Docker installed, this is the easiest variant.
 
-**Variante 3**: GitPod
+**Variant 3**: GitPod
 
-[GitPod](https://gitpod.io) ist eine vollständige Online Entwicklungsumgebung. Voraussetzung hierfür ist ein GitHub und ein GitPod-Account, die beide kostenlos sind. du kannst das komplette Repository über GitHub in GitPod starten. Dann kannst du entweder vollständig in GitPod arbeiten (Web, VS Code oder IntelliJ) oder du verwendest du nur das Backend, das in GitPod läuft, wenn du den Workspace in GitPod gestartet hast.
+[GitPod](https://gitpod.io) is a complete online development environment. This requires a GitHub and a GitPod account, both of which are free. You can start the complete repository via GitHub in GitPod. Then you can either work completely in GitPod (Web, VS Code, or IntelliJ) or you just use the backend running in GitPod when you have started the workspace in GitPod.
 
-- Diese Variante ist am besten, wenn du auf deinem Laptop nichts installieren möchtest (auch keine npm-Packages)
-- du benötigst nur Internet-Zugriff (Web) und einen GitHub- und GitPod-Account, die beide kostenlos sind.
+- This variant is best if you want to install nothing on your laptop (including no npm packages).
+- You only need internet access (Web) and a GitHub and GitPod account, both of which are free.
 
-### Voraussetzungen für die React SPA- und Next.js-Anwendung
+### Requirements for the React SPA and Next.js Application
 
-Die beiden React-Anwendungen benötigen Node.JS (mindestens Version 18). Die Pakete werden mit [pnpm](https://pnpm.io/installation) installiert. Dabei handelt es sich um einen alternativen Package-Manager zur npm, den du über Node.js selbst aktivieren kannst. Wenn das bei dir nicht funktioniert, sollte auch npm oder yarn funktionieren. Ich habe die Installation aber nur mit pnpm getestet.
+Both applications require Node.js (at least version 18). The packages are installed with [pnpm](https://pnpm.io/installation), an alternative package manager to npm, which you can enable through Node.js itself. If that doesn't work for you, npm or yarn should also work. However, I have only tested the installation with pnpm.
 
-Dein Laptop muss mit dem Package Manager in der Lage sein, npm Packages runterzuladen und zu installieren.
+Your laptop must be able to download and install npm packages using the package manager.
 
-- Die **React SPA** läuft auf Port `8090`.
-- Die **Next.js-Anwendung** läuft auf Port `8100`. 
-- Diese beiden Ports müssen also bei dir frei sein.
+- The **React SPA** runs on port `8090`.
+- The **Next.js application** runs on port `8100`.
+- So these two ports must be free on your device.
 
+## Installation and Starting of the Backend
 
-## Installation und Starten des Backends
+- Regarding the **requirements** for each variant, see above.
+- If you normally don't develop in Java, the **easiest** way is to use **Variant 2 (Docker)**.
 
-- Zu den **Voraussetzungen** der einzelnen Varianten, s.o.
-- Sofern du normalerweise kein Java entwickelst, ist es am **einfachsten**, wenn du **Variante 2 (Docker)** verwendest.
+### Variant 1: Starting the Java Process in Your IDE
 
-### Variante 1: Starten des Java-Prozesses in deiner IDE
+The Java project is built with Gradle. When you open the project in your IDE, it should be able to import Gradle
 
-Das Java-Projekt wird mit Gradle gebaut. Wenn du das Projekt in deiner IDE öffnest, sollte diese also in der Lage sein, Gradle-Projekte zu importieren. Das geht bei IntelliJ z.B. automatisch. Nach dem Importieren und compilieren startest du die Spring Boot `main`-Klasse `nh.recipify.BackendApplication`.
+projects, which is automatic in IntelliJ, for example. After importing and compiling, you start the Spring Boot `main` class `nh.recipify.BackendApplication`.
 
-> **Arbeitsverzeichnis setzen**
-> 
-> In IntelliJ musst du in der Run Configuration darauf achten, dass das `Working directory` auf `$MODULE_DIR$` gesetzt ist.
-> Am besten, du verwendest einfach die fertige Run Configuration `01 - Run BackendApplication (with DB)`
+> **Set working directory**
+>
+> In IntelliJ, ensure that the `Working directory` is set to `$MODULE_DIR$` in the Run Configuration.
+> It's best to use the pre-configured Run Configuration `01 - Run BackendApplication (with DB)`
 
-Diese Klasse sorgt auch automatisch dafür, dass ein Docker-Container mit einer Postgres Datenbank gestartet wird. Voraussetzung dafür ist, dass du docker-compose auf einem Computer installiert hast.
+This class also automatically ensures that a Docker container with a Postgres database is started. This requires that you have docker-compose installed on a computer.
 
-Wenn das Backend gestartet ist, kannst du einmal `http://localhost:8080/api/recipes` im Browser öffnen. Dort sollte eine JSON-Liste mit Rezepten zurückgeliefert werden.
+When the backend is started, you can open `http://localhost:8080/api/recipes` in your browser. There should be a JSON list of recipes returned.
 
-### Variante 2: Starten des Backends per docker-compose
+### Variant 2: Starting the Backend via docker-compose
 
-Du kannst das fertige Backend samt Datenbank starten, in dem du das `docker-compose-backend.yaml`-File im Root-Verzeichnis des Workspaces startest:
+You can start the ready-made backend along with the database by starting the `docker-compose-backend.yaml` file in the root directory of the workspace:
 
 ```
 docker-compose -f docker-compose-backend.yaml up -d
 ```
 
-In dem Compose-File sind der Backend-Prozess und die Datenbank beschrieben, so dass du nichts weiter starten musst.
+The compose file describes the backend process and the database, so you don't need to start anything else.
 
-Wenn das Backend gestartet ist, kannst du einmal `http://localhost:8080/api/recipes` im Browser öffnen. Dort sollte eine JSON-Liste mit Rezepten zurückgeliefert werden.
+When the backend is started, you can open `http://localhost:8080/api/recipes` in your browser. There should be a JSON list of recipes returned.
 
-### Variante 3: GitPod
+### Variant 3: GitPod
 
-Um den kompletten Workspace in GitPod zu starten, gibt es zwei Möglichkeiten.
+To start the complete workspace in GitPod, there are two options.
 
-- du kannst einfach [mit diesem Link GitPod mit dem Workspace starten](https://gitpod.io/#https://github.com/nilshartmann/state-of-react-2024)
-- du öffnest die Seite https://github.com/nilshartmann/state-of-react-2024 im Browser und klickst dort auf `Open`.
-- Hinweis: grundsätzlich kannst du den Workspace über Gitpod auch in einer lokalen IDE öffnen. Dazu wirst du beim Starten von GitPod befragt. Dafür müssen aber bestimmte Voraussetzungen erfüllt sein. Weitere Informationen findest du [hier in der GitPod Dokumentation](https://www.gitpod.io/docs/references/ides-and-editors)
+- You can simply [start GitPod with the workspace using this link](https://gitpod.io/#https://github.com/nilshartmann/state-of-react-2024)
+- You open the page https://github.com/nilshartmann/state-of-react-2024 in your browser and click on `Open`.
+- Note: You can also open the workspace in a local IDE via GitPod. You will be asked about this when you start GitPod. However, certain conditions must be met. You can find more information [here in the GitPod documentation](https://www.gitpod.io/docs/references/ides-and-editors).
 
-## Installation der beiden Frontend-Anwendungen (React SPA und Next.js)
+## Installation of the two Frontend Applications (React SPA and Next.js)
 
-Die beiden Anwendungen existiert jeweils zweimal:
+The two applications each exist twice:
 
-1. Jeweils in einer "Workspace-Version" (Verzeichnisse: `1_spa/spa_workspace` bzw. `2_nextjs/nextjs_workspace`). **In diesen Verzeichnisse mache ich während des Vortrags Live-Coding**. Du kannst Du Verzeichnisse verwenden, wenn du meine Beispiele nach dem Vortrag selbst nachvollziehen willst.
-2. Jeweils in einer "fertigen" Version (Verzeichnisse `1_spa/spa_frontend` `2_nextjs/nextjs_frontend`), die du dir bei Interesse ansehen kannst. Diese Versionen sind weitgehend identisch mit der jeweils fertigen "Workspace-Version", enthalten aber noch ein paar Features, die über den Vortrag hinausgehen. Wenn du diesen Stand zum ausprobieren starten möchtest, sind dieselben Schritte wie für die "Workspace-Version" erforderlich. Du führst die Schritte dann aber jeweils im Verzeichnis `1_spa/spa_frontend` bzw `2_nextjs/nextjs_frontend` aus. Du kannst immer nur jeweils die "fertige" _oder_ die "Workspace-Version" starten, da es sonst zu Port-Kollisionen kommt. 
+1. Each in a "workspace version" (directories: `1_spa/spa_workspace` and `2_nextjs/nextjs_workspace`). **I do live coding during the talk in these directories**. You can use the directories if you want to follow my examples after the talk.
+2. Each in a "completed" version (directories `1_spa/spa_frontend` `2_nextjs/nextjs_frontend`), which you can look at if interested. These versions are largely identical to the respective "workspace version" but contain a few features that go beyond the talk. If you want to start these versions to play with, you will need to follow the same steps as for the "workspace version". You can only start either the "ready" _or_ the "workspace version" at a time, otherwise, there will be port collisions.
 
-### (Optional) Schritt 1: Installation von pnpm
+### (Optional) Step 1: Installation of pnpm
 
-Grundsätzlich sollte die Installation der npm-Packages mit npm und yarn funktionieren.
+In general, installing npm packages with npm and yarn should work.
 
-Ich habe aber mit [pnpm](https://pnpm.io/) getestet. Falls du noch kein pnpm installiert hast, solltest du das jetzt tun. Dazu gibt es [mehrere Wege](https://pnpm.io/installation). Am einfachsten geht es über [Node.js corepacks](https://nodejs.org/docs/latest-v20.x/api/corepack.html).
+However, I have tested with [pnpm](https://pnpm.io/). If you have not yet installed pnpm, you should do so now. There are [several ways](https://pnpm.io/installation) to install it. The easiest way is via [Node.js corepacks](https://nodejs.org/docs/latest-v20.x/api/corepack.html).
 
-Dazu führst du einfach auf der Kommandozeile folgenden Befehl aus (`corepacks` ist Bestandteil von Node.js):
+Simply execute the following command on the command line (`corepacks` is part of Node.js):
 
 ```
 corepacks enable
 ```
 
 
-### Schritt 2: Installation der npm-Packages für die SPA-Anwendung
+### Step 2: Installation of npm Packages for the SPA Application
 
-Wir arbeiten im Verzeichnis `2_spa/spa_workspace`. In diesem Verzeichnis auf der Kommandozeile bitte folgenden Befehl ausführen:
+We work in the directory `2_spa/spa_workspace`. Please execute the following command in this directory on the command line:
 
 ```
 pnpm install
 ```
 
-(Alternative npm oder yarn verwenden)
+(Alternative use npm or yarn)
 
 
-### Schritt 3: Starten der SPA-Anwendung
+### Step 3: Starting the SPA Application
 
-Die SPA-Anwendung startest du ebenfalls im `1_spa/spa_workspace`-Verzeichnis. Dort musst du das `dev`-Script ausführen:
+You also start the SPA application in the `1_spa/spa_workspace` directory. There you must run the `dev` script:
 
 ```
 pnpm dev
 ```
 
-Die Anwendung (Vite Devserver) startet nun und sollte nach kurzer Zeit auf http://localhost:8090 laufen.
+The application (Vite Devserver) now starts and should be running at http://localhost:8090 after a short time.
 
 
-### Schritt 4: Installation der npm-Packages für die Next.js-Anwendung
+### Step 4: Installation of npm Packages for the Next.js Application
 
-Wir arbeiten im Verzeichnis `2_nextjs/nextjs_workspace`. In diesem Verzeichnis auf der Kommandozeile bitte folgenden Befehl ausführen:
+We work in the directory `2_nextjs/nextjs_workspace`. Please execute the following command in this directory on the command line:
 
 ```
 pnpm install
 ```
 
-(Alternative npm oder yarn verwenden)
+(Alternative use npm or yarn)
 
-### Schritt 4: Starten der Next.js-Anwendung
+### Step 4: Starting the Next.js Application
 
-Die Next.js-Anwendung wird im Verzeichnis `2_nextjs/nextjs_workspace` gestartet. Dort bitte das `dev`-Script ausführen:
+The Next.js application is started in the `2_nextjs/nextjs_workspace` directory. There please run the `dev` script:
 
 ```bash
 pnpm dev
 ```
 
-(In **IntelliJ** kannst du Next.js im Workspace auch über die Run Configuration `[NEXTJS WORKSPACE] - 01 dev` starten)
+(In **IntelliJ** you can also start Next.js in the workspace using the Run Configuration `[NEXTJS WORKSPACE] - dev:clean`)
 
-Die Anwendung startet nun und sollte nach kurzer Zeit auf http://localhost:8100 laufen.
+The application starts now and should be running at http://localhost:8100 after a
 
-#### Hinweise zum Next.js Cache
+short time.
 
-Next.js hat ein sehr aggressives Caching eingebaut. Deswegen kann es manchmal sein, dass du Änderungen nicht sofort siehst. Deswegen hilft es manchmal:
+#### Notes on Next.js Cache
 
-- Im Browser "hard refresh" machen (Cmd+Shift+R bzw. Ctrl+Shift+R bei Firefox z.B.). Dann verwirft Firefox Dateien im Cache.
-- Das Verzeichnis `2_nextjs/nextjs_workspace/.next` löschen und Next.js neustarten
+Next.js has very aggressive caching built-in. Therefore, sometimes you might not see changes immediately. In such cases, it helps to:
 
-## Fragen, Kommentare, Feedback
+- Perform a "hard refresh" in the browser (Cmd+Shift+R or Ctrl+Shift+R in Firefox, for example). This discards files in the cache.
+- Delete the `2_nextjs/nextjs_workspace/.next` directory and restart Next.js.
 
-Wenn du Fragen oder Probleme hast, sprich mich gerne an.
+## Questions, Comments, Feedback
 
-Wenn du mit mir in Kontakt bleiben möchtest, findest du hier meine [Kontaktdaten](https://nilshartmann.net/kontakt).
+If you have any questions or issues, feel free to contact me.
 
+If you would like to stay in touch, you can find my [contact details here](https://nilshartmann.net/kontakt).
